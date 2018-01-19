@@ -38,10 +38,10 @@ public class CsvExporterTest extends AbstractKettleExporterTestBase {
   public void testCsvExport1() throws Exception {
     TableModel table = BasicExportExamples.getTestTable1();
     final String expected =
-      "The Integer;\"The String\";The Numeric;The Date;The Calculation\n"
-        + "1;\"One\";1.05;Sun Jan 01 00:01:01 GMT 2012;-12.34567890123456789\n"
-        + "-2;\"Two > One\";-1.05;;987654321.12345678900\n"
-        + "9223372036854775807;\"Many\";1.7976931348623157E308;Thu Jan 01 00:00:00 GMT 1970;4.9E-325\n";
+      "The Integer;\"The String\";The Numeric;The Date;The Calculation\r\n"
+        + "1;\"One\";1.05;Sun Jan 01 00:01:01 GMT 2012;-12.34567890123456789\r\n"
+        + "-2;\"Two > One\";-1.05;;987654321.12345678900\r\n"
+        + "9223372036854775807;\"Many\";1.7976931348623157E308;Thu Jan 01 00:00:00 GMT 1970;4.9E-325\r\n";
     final String result = getCsvResult( table );
     assertEquals( expected, result );
   }
@@ -77,16 +77,16 @@ public class CsvExporterTest extends AbstractKettleExporterTestBase {
   }
 
   private static final String getCustomExpect1() {
-    return "The Integer|'The String'|The Numeric|The Date|The Calculation\n"
-      + "1|'One'|1.05|Sun Jan 01 00:01:01 GMT 2012|-12.34567890123456789\n"
-      + "-2|'Two > One'|-1.05||987654321.12345678900\n"
-      + "9223372036854775807|'Many'|1.7976931348623157E308|Thu Jan 01 00:00:00 GMT 1970|4.9E-325\n";
+    return "The Integer|'The String'|The Numeric|The Date|The Calculation\r\n"
+      + "1|'One'|1.05|Sun Jan 01 00:01:01 GMT 2012|-12.34567890123456789\r\n"
+      + "-2|'Two > One'|-1.05||987654321.12345678900\r\n"
+      + "9223372036854775807|'Many'|1.7976931348623157E308|Thu Jan 01 00:00:00 GMT 1970|4.9E-325\r\n";
   }
 
   @Test
   public void testCsvNulls() throws Exception {
     TableModel table = BasicExportExamples.getNullOneLiner();
-    final String result = getCsvResult( table ).split( "\n" )[ 1 ];
+    final String result = getCsvResult( table ).split( "\r\n" )[ 1 ];
     final String expected = ";;;;";
     assertEquals( expected, result );
   }
@@ -105,7 +105,7 @@ public class CsvExporterTest extends AbstractKettleExporterTestBase {
     TableModel table = new SimpleTableModel(
       new Object[] { "don't miss this", "other" },
       new Object[] { "ok", "'';'" } );
-    final String[] result = getCsvResult( table, settings ).split( "\n" );
+    final String[] result = getCsvResult( table, settings ).split( "\r\n" );
     assertEquals( "'don''t miss this';'other'", result[ 1 ] );
     assertEquals( "'ok';''''';'''", result[ 2 ] );
   }

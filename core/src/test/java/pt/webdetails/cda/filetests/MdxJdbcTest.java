@@ -290,7 +290,7 @@ public class MdxJdbcTest extends CdaTestCase {
   }
 
   public void testCsvExport() throws Exception {
-    String expectedOutput = "\"[Measures].[MeasuresLevel]\";Year;price\n\"Sales\";445094.69;564842.02\n";
+    String expectedOutput = "\"[Measures].[MeasuresLevel]\";Year;price\r\n\"Sales\";445094.69;564842.02\r\n";
 
     final CdaSettings cdaSettings = parseSettingsFile( "sample-output.cda" );
 
