@@ -1,5 +1,5 @@
 /*!
- * Copyright 2002 - 2017 Webdetails, a Hitachi Vantara company. All rights reserved.
+ * Copyright 2002 - 2018 Webdetails, a Hitachi Vantara company. All rights reserved.
  *
  * This software was developed by Webdetails and is provided under the terms
  * of the Mozilla Public License, Version 2.0, or any later version. You may not use
@@ -225,8 +225,8 @@ public class ParameterTest {
     Calendar cld = Calendar.getInstance();
     cld.setTime( ( (Date[]) value )[ 0 ] );
     Assert.assertEquals( 2014, cld.get( Calendar.YEAR ) );
-    Assert.assertEquals( Calendar.OCTOBER, cld.get( Calendar.MONTH ) );
-    Assert.assertEquals( 2, cld.get( Calendar.DAY_OF_MONTH ) );
+    Assert.assertEquals( 9, cld.get( Calendar.MONTH ) );
+    Assert.assertEquals( 1, cld.get( Calendar.DAY_OF_MONTH ) );
   }
 
   @Test
@@ -251,8 +251,8 @@ public class ParameterTest {
     Calendar cld = Calendar.getInstance();
     cld.setTime( ( (Date[]) value )[ 1 ] );
     Assert.assertEquals( 2014, cld.get( Calendar.YEAR ) );
-    Assert.assertEquals( Calendar.NOVEMBER, cld.get( Calendar.MONTH ) );
-    Assert.assertEquals( 1, cld.get( Calendar.DAY_OF_MONTH ) );
+    Assert.assertEquals( Calendar.OCTOBER, cld.get( Calendar.MONTH ) );
+    Assert.assertEquals( 31, cld.get( Calendar.DAY_OF_MONTH ) );
 
   }
 
@@ -266,8 +266,8 @@ public class ParameterTest {
     Calendar cld = Calendar.getInstance();
     cld.setTime( ( (Date[]) value )[ 1 ] );
     Assert.assertEquals( 2014, cld.get( Calendar.YEAR ) );
-    Assert.assertEquals( Calendar.NOVEMBER, cld.get( Calendar.MONTH ) );
-    Assert.assertEquals( 1, cld.get( Calendar.DAY_OF_MONTH ) );
+    Assert.assertEquals( 9, cld.get( Calendar.MONTH ) );
+    Assert.assertEquals( 31, cld.get( Calendar.DAY_OF_MONTH ) );
 
   }
 

@@ -1,17 +1,16 @@
-/*
- * Copyright 2018 Hitachi Vantara. All rights reserved.
+/*!
+ * Copyright 2018 Webdetails, a Hitachi Vantara company. All rights reserved.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * This software was developed by Webdetails and is provided under the terms
+ * of the Mozilla Public License, Version 2.0, or any later version. You may not use
+ * this file except in compliance with the license. If you need a copy of the license,
+ * please go to  http://mozilla.org/MPL/2.0/. The Initial Developer is Webdetails.
  *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * Software distributed under the Mozilla Public License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. Please refer to
+ * the license for the specific language governing your rights and limitations.
  */
+
 package pt.webdetails.cda.connections.dataservices;
 
 import org.dom4j.Element;
@@ -23,8 +22,14 @@ public class DataservicesConnectionInfo {
 
   private Properties properties;
 
+  private String dataServiceName;
+
   public DataservicesConnectionInfo( final Element connection ) {
     properties = new Properties();
+
+    final String dataServiceName = (String) connection.selectObject( "string(./DataServiceName)" );
+    this.dataServiceName = dataServiceName;
+    properties.setProperty( "dataServiceName", dataServiceName );
 
     final List<?> list = connection.elements( "Property" );
     for ( int i = 0; i < list.size(); i++ ) {
@@ -35,7 +40,29 @@ public class DataservicesConnectionInfo {
     }
   }
 
+  public String getDataServiceName() {
+    return dataServiceName;
+  }
+
   public Properties getProperties() {
     return properties;
+  }
+
+  @Override public boolean equals( Object o ) {
+    if ( this == o ) {
+      return true;
+    }
+    if ( !( o instanceof DataservicesConnectionInfo ) ) {
+      return false;
+    }
+
+    DataservicesConnectionInfo that = (DataservicesConnectionInfo) o;
+
+    return getDataServiceName() != null ? getDataServiceName().equals( that.getDataServiceName() ) :
+      that.getDataServiceName() == null;
+  }
+
+  @Override public int hashCode() {
+    return getDataServiceName() != null ? getDataServiceName().hashCode() : 0;
   }
 }
