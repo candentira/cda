@@ -22,12 +22,27 @@ import org.pentaho.reporting.engine.classic.core.modules.misc.datafactory.sql.Dr
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class DataservicesDriverLocalConnectionProvider extends DriverConnectionProvider {
 
+  private Supplier<List<DataServiceClientService>> serviceSupplier;
+
+  public DataservicesDriverLocalConnectionProvider() {
+    this(DataservicesDriverLocalConnectionProvider.defaultSupplier());
+  }
+
+  public DataservicesDriverLocalConnectionProvider(Supplier<List<DataServiceClientService>> serviceSupplier) {
+    this.serviceSupplier = serviceSupplier;
+  }
+
+  private static Supplier<List<DataServiceClientService>> defaultSupplier() {
+    return () -> PentahoSystem.getAll(DataServiceClientService.class);
+  }
+
   @Override public Connection createConnection( String user, String password ) throws SQLException {
     if ( ThinConnection.localClient == null ) {
-      List<DataServiceClientService> listDataServiceClientServices = PentahoSystem.getAll( DataServiceClientService.class );
+      List<DataServiceClientService> listDataServiceClientServices = this.serviceSupplier.get();
       if ( listDataServiceClientServices != null && listDataServiceClientServices.size() > 0 ) {
         // gets the first one... if later more than one implementation exists, we need to think on how to filter
         // the correct one

@@ -32,14 +32,9 @@ public class DataservicesLocalConnection implements IDataservicesLocalConnection
     URL contextRootUrl = new URL( PluginEnvironment.env().getUrlProvider().getWebappContextRoot());
     String hostname = contextRootUrl.getHost();
     String port = String.valueOf( contextRootUrl.getPort() );
-    String databaseName = PluginEnvironment.env().getUrlProvider().getWebappContextPath().replace( "/", "" );
-    String url = new DataServiceClientPlugin().getURL(hostname, port, databaseName);
+    String path = PluginEnvironment.env().getUrlProvider().getWebappContextPath().replace( "/", "" );
+    String url = new DataServiceClientPlugin().getURL(hostname, port, path) + "?local=true";
     connectionProvider.setUrl( url );
-
-    //connectionProvider.setDriver( "org.pentaho.di.trans.dataservice.jdbc.ThinDriver" );
-    //connectionProvider.setUrl( PentahoSystem.getApplicationContext().getFullyQualifiedServerURL() + "kettle" );
-    //connectionProvider.setUrl( "jdbc:pdi://localhost:8080/pentaho/kettle" );
-
     return connectionProvider;
   }
 }
