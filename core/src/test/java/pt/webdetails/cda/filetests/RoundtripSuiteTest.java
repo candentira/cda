@@ -148,6 +148,10 @@ public class RoundtripSuiteTest extends XMLTestCase {
     equalityCheck( "sample-xpath.cda" );
   }
 
+  public void testDataservice() throws Exception {
+    equalityCheck( "sample-dataservice.cda" );
+  }
+
   protected SettingsManager getSettingsManager() {
     return getEngine().getSettingsManager();
   }
